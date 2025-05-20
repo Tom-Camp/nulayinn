@@ -1,0 +1,25 @@
+Vcc (Battery+)
+                      |
+                      |
+                     +-+
+                     | | 100kΩ Resistor
+                     | |
+                     +-+
+                      |
+                      +------+
+                      |      |
+                      |      | 
+                      |      |
+               GPIO29 |      | Adafruit Feather RP2040 RFM95
+                      |      |
+                      |      |
+                      +------+
+                      |
+                     +-+
+                     | | 100kΩ Resistor
+                     | |
+                     +-+
+                      |
+                      |
+                    Ground
+

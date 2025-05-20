@@ -1,0 +1,11 @@
+[project]
+name = "nulayinn"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.9"
+dependencies = [
+    "adafruit-circuitpython-ahtx0>=1.0.26",
+    "adafruit-circuitpython-bme680>=3.7.12",
+    "adafruit-circuitpython-rfm9x>=2.2.19",
+    "circuitpython-stubs>=9.2.7",
+]
