@@ -15,7 +15,7 @@ BME680 sensor is for temperature, humidity, pressure and gas inside the coop.
 
 The code includes a power management system that monitors the battery voltage and puts the system to sleep if the 
 voltage drops below a certain threshold to prevent malformed packets. The system wakes up every hour to take a reading 
-and send the data to a [Raspberry Pi RFM9x receiver](https://github.com/Tom-Camp/rfm_receiver). The receiver then relays 
+and sends the data to a [Raspberry Pi RFM9x receiver](https://github.com/Tom-Camp/rfm_receiver). The receiver then relays 
 the data to an API server.
 
 ## Hardware
@@ -27,7 +27,7 @@ the data to an API server.
 - Solar Panel with 5V 3.5W Continuously Charging
 
 The [diagram](diagram) file describes the additions to the board needed for the battery monitor to work. Connect a 100kΩ 
-resistor to the VBAT pin and a 100kΩ resistor to a ground pin with a jumper wire connect in between the two resistors 
+resistor to the VBAT pin and a 100kΩ resistor to a ground pin with a jumper wire connected in between the two resistors 
 going to one of the analog pins (A0, A1, A2, A3) to form a voltage divider. If you choose an analog pin other than A3, 
 you will need to change the `battery_pin` value in line 9 of the [battery_monitor.py](lib/battery_monitor.py) file.
 
