@@ -12,8 +12,8 @@ mode that sends data every hour. The AHT20 sensor is used for temperature and hu
 BME680 sensor is for temperature, humidity, pressure and gas inside the coop.
 
 The code includes a power management system that monitors the battery voltage and puts the system to sleep if the 
-voltage drops below a certain threshold to prevent packet loss. The system wakes up every hour to take a reading and 
-send the data to a [Raspberry Pi RFM9x receiver](https://github.com/Tom-Camp/rfm_receiver). The receiver then relays 
+voltage drops below a certain threshold to prevent malformed packets. The system wakes up every hour to take a reading 
+and send the data to a [Raspberry Pi RFM9x receiver](https://github.com/Tom-Camp/rfm_receiver). The receiver then relays 
 the data to an API server.
 
 ## Hardware
@@ -23,6 +23,13 @@ the data to an API server.
 - [Adafruit AHT20 - Temperature & Humidity Sensor Breakout Board](https://www.adafruit.com/product/4566)
 - [Lithium Ion Battery - 3.7V 2000mAh](https://www.digikey.com/en/products/detail/adafruit-industries-llc/2011/6612469?so=89389693&content=productdetail_US&mkt_tok=MDI4LVNYSy01MDcAAAGWajcL_5vQOjPWD-eAVw-kvba4MqUPiOxf-pwP6LgDc1mBYv5LtwWUqilrqSwNAF13SQ-5bRaKJfkmGwpMcVgywjLbSSO0idYhVo5vVjcd)
 - Solar Panel with 5V 3.5W Continuously Charging
+
+The [diagram](diagram) file describes the additions to the board needed for the battery monitor to work. Connect a 100kΩ 
+resistor to the VBAT pin and a 100kΩ resistor to a ground pin with a jumper wire connect in between the two resistors 
+going to one of the analog pins (A0, A1, A2, A3) to form a voltage divider. If you choose an analog pin other than A3, 
+you will need to change the `battery_pin` value in line 9 of the [battery_monitor.py](lib/battery_monitor.py) file.
+
+[Adafruit Feather RP2040 RFM95 pinout](https://cdn-learn.adafruit.com/assets/assets/000/120/283/original/adafruit_products_Adafruit_Feather_RP2040_RFM95_Pinout.png?1681763258)
 
 ## Software
 
