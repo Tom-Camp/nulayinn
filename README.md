@@ -4,6 +4,8 @@ The NuLay Inn is a sensor package for monitoring the environment in our chicken 
 the Adafruit Feather RP2040 RFM95, an Adafruit BME680 - Temperature, Humidity, Pressure and Gas Sensor, and an Adafruit 
 AHT20 - Temperature & Humidity Sensor Breakout Board.
 
+The name NuLay Inn is a nod to the historic [NuWray Hotel](https://www.nuwray.com/) here in Burnsville, North Carolina.
+
 ## Features
 
 The system is designed to run with a battery and solar panel, and is capable of sending data to a server via LoRa. 
