@@ -15,10 +15,13 @@ def sleep(duration: int = 3600):
     time_alarm = alarm.time.TimeAlarm(monotonic_time=time.monotonic() + duration)
     alarm.exit_and_deep_sleep_until_alarms(time_alarm)
 
+
 def celsius_to_fahrenheit(celsius: float) -> float:
     return (celsius * 9 / 5) + 32
 
+
 battery = BatteryMonitor()
+voltage: float = 0.0
 try:
     voltage = battery.read_battery_voltage()
     battery.blink_status()
@@ -30,15 +33,19 @@ try:
 except Exception as e:
     print(f"Error: {e}")
 
-
-i2c = busio.I2C(board.A1, board.A0)
+i2c = busio.I2C(scl=board.A1, sda=board.A0)
 air = AHTx0(i2c_bus=i2c)
 
 air_temp = air.temperature
 air_humidity = air.relative_humidity
 
 mox = Adafruit_BME680_I2C(i2c=i2c, debug=False)
-mox.sea_level_pressure = 1013.25
+
+start_time = time.monotonic()
+warmup_duration = 120
+while (time.monotonic() - start_time) < warmup_duration:
+    print(f"Gas: {mox.gas} ohms")
+    time.sleep(2)
 
 coop_temp = mox.temperature
 coop_humidity = mox.humidity
@@ -50,7 +57,7 @@ message: dict = {
     "api_key": os.getenv("API_KEY", "unknown"),
     "data": {
         "outside": {
-            "air_temp": celsius_to_fahrenheit(air_temp) - .5,
+            "air_temp": celsius_to_fahrenheit(air_temp),
             "humidity": air_humidity,
         },
         "coop": {
@@ -58,7 +65,8 @@ message: dict = {
             "coop_humidity": coop_humidity,
             "coop_gas": coop_gas,
             "coop_pressure": coop_pressure,
-        }
+        },
+        "battery": voltage,
     },
 }
 
